@@ -9,7 +9,6 @@ Authors:    Janez Nemanič <janez.nemanic@gmail.com>
 
 import pprint
 import subprocess
-import os
 import fedmsg.consumers
 import moksha.hub.reactor
 
