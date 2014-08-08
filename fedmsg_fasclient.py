@@ -34,10 +34,6 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
         # until we ultimately act on a pkgdb message.
         self.delay = self.hub.config['fasclient.consumer.delay']
 
-        # This is the serial that is passed onto ansible specifying how many
-        # hosts to run at the same time.
-        self.serial = self.hub.config.get('fasclient.consumer.serial', 3)
-
         # We use this to manage our state
         self.queued_messages = []
 
@@ -75,8 +71,8 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     def action(self, messages):
         self.log.debug("Acting on %s" % pprint.pformat(messages))
 
-        command = '/usr/bin/sudo -i ansible "fasClient -i" all -f %s' % (
-            self.serial)
+        command = '/usr/bin/sudo -i rbac-playbook ' \
+            '/srv/web/infra/ansible/playbooks/run_fasClient.yml'
         command = command.split()
 
         self.log.info("Running %r" % command)
