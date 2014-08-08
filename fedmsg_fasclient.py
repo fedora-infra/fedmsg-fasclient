@@ -28,7 +28,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     config_key = 'fasclient.consumer.enabled'
 
     def __init__(self, hub):
-        super(GenACLsConsumer, self).__init__(hub)
+        super(FasClientConsumer, self).__init__(hub)
 
         # This is required.  It is the number of seconds that we should wait
         # until we ultimately act on a pkgdb message.
