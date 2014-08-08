@@ -51,7 +51,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
                 return
 
         # Skip the run when certain groups are updated
-        if  msg['topic'].startswith('org.fedoraproject.prod.fas.group.member.'):
+        if msg['topic'].startswith('org.fedoraproject.prod.fas.group.member.'):
             if msg['group'] in ['cla_fpca']:
                 return
 
