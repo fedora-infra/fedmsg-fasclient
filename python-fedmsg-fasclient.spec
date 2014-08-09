@@ -8,7 +8,7 @@
 
 Name:               python-fedmsg-fasclient
 Version:            0.1
-Release:            1%{?dist}
+Release:            2%{?dist}
 Summary:            A fedmsg consumer that runs fasClient in response to FAS messages
 
 Group:              Development/Libraries
@@ -23,6 +23,7 @@ BuildRequires:      python-setuptools
 BuildRequires:      fedmsg
 
 Requires:           fedmsg
+Requires:           fedmsg-hub
 
 %description
 A simple script monitoring fedmsg for FAS messages, delaying action
@@ -53,5 +54,8 @@ cp -p fedmsg.d/fasclient-example-config.py \
 %config(noreplace) %{_sysconfdir}/fedmsg.d/fasclient.py*
 
 %changelog
+* Sat Aug 09 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.1-2
+- Add missing requires on fedmsg-hub
+
 * Fri Aug 08 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.1-1
 - Original work on packaging for Fedora and EPEL
