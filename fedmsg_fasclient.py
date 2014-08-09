@@ -43,7 +43,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
 
         # Only run fasclient if the user changed his/her ssh key in FAS
         if msg['topic'] == 'org.fedoraproject.prod.fas.user.update':
-            if 'ssh_key' not in msg['msg']['fields']:
+            if 'ssh_key' not in msg['fields']:
                 return
 
         # Skip the run when certain groups are updated
