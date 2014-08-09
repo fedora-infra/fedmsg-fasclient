@@ -73,7 +73,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     def action(self, messages):
         self.log.debug("Acting on %s" % pprint.pformat(messages))
 
-        command = '/usr/bin/sudo -i rbac-playbook ' \
+        command = '/usr/bin/sudo -i /usr/bin/ansible-playbook ' \
             '/srv/web/infra/ansible/playbooks/run_fasClient.yml'
         command = command.split()
 
