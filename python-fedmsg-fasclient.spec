@@ -7,7 +7,7 @@
 %global modname fedmsg_fasclient
 
 Name:               python-fedmsg-fasclient
-Version:            0.1.1
+Version:            0.2
 Release:            1%{?dist}
 Summary:            A fedmsg consumer that runs fasClient in response to FAS messages
 
@@ -54,6 +54,10 @@ cp -p fedmsg.d/fasclient-example-config.py \
 %config(noreplace) %{_sysconfdir}/fedmsg.d/fasclient.py*
 
 %changelog
+* Sat Aug 09 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.2
+- Update to 0.2
+- Fix parsing the fedmsg message by being over-cautious
+
 * Sat Aug 09 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.1.1-1
 - Bugfix release fixing how the fields changed are lookedup when a user changes
   his/her account
