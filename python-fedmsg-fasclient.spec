@@ -7,7 +7,7 @@
 %global modname fedmsg_fasclient
 
 Name:               python-fedmsg-fasclient
-Version:            0.2
+Version:            0.3
 Release:            1%{?dist}
 Summary:            A fedmsg consumer that runs fasClient in response to FAS messages
 
@@ -54,7 +54,13 @@ cp -p fedmsg.d/fasclient-example-config.py \
 %config(noreplace) %{_sysconfdir}/fedmsg.d/fasclient.py*
 
 %changelog
-* Sat Aug 09 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.2
+* Sun Aug 10 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.3-1
+- Update to 0.3
+- Let fedmsg-fasclient rely directly on ansible-playbook rather than
+  rbac-playbook
+- Fix changelog entry for 0.2
+
+* Sat Aug 09 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.2-1
 - Update to 0.2
 - Fix parsing the fedmsg message by being over-cautious
 
