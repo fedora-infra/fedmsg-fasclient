@@ -69,7 +69,6 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
             else:
                 self.log.info("%r is not for cla_fpca" % msg.get('msg_id'))
 
-        msg = msg['body']
         self.log.info("Got a message %r" % msg['topic'])
 
         def delayed_consume():
