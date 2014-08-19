@@ -14,7 +14,7 @@ Running
     sudo yum install python-virtualenvwrapper
 
     # In a new terminal
-    mkvirtualenv genacls-fasclient
+    mkvirtualenv fedmsg-fasclient
     python setup.py develop
     fedmsg-hub
 
