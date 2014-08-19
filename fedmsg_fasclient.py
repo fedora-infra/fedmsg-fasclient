@@ -41,17 +41,30 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
         if msg['topic'] not in self.interesting_topics:
             return
 
+        # Check to see if it's not crazy-malformed
+        if 'msg' not in msg:
+            self.log.warning("msg %r, %r is crazy malformed" % (
+                msg.get('msg_id'), msg.get('topic')))
+            return
+
         # Only run fasclient if the user changed his/her ssh key in FAS
         if msg['topic'] == 'org.fedoraproject.prod.fas.user.update':
-            if 'msg' in msg and 'fields' in msg['msg'] and \
-                    'ssh_key' not in msg['msg']['fields']:
+            fields = msg['msg'].get('fields', [])
+            if 'ssh_key' not in fields:
+                self.log.debug("msg %r has no 'ssh_key' in %r" % (
+                    msg.get('msg_id'), fields))
                 return
+            else:
+                self.log.info("%r bears ssh_key change" % msg.get('msg_id'))
 
         # Skip the run when certain groups are updated
         if msg['topic'].startswith('org.fedoraproject.prod.fas.group.member.'):
-            if 'msg' in msg and 'group' in msg['msg'] and \
-                    msg['msg']['group'] in ['cla_fpca']:
+            group = msg['msg'].get('group', None)
+            if group in ['cla_fpca']:
+                self.log.debug("msg %r group 'cla_fpca'" % msg.get('msg_id'))
                 return
+            else:
+                self.log.info("%r is not for cla_fpca" % msg.get('msg_id'))
 
         msg = msg['body']
         self.log.info("Got a message %r" % msg['topic'])
