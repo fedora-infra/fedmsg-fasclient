@@ -41,6 +41,9 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
         if msg['topic'] not in self.interesting_topics:
             return
 
+        # Strip off moksha's outer envelope, which should always be present
+        msg = msg.get('body', {})
+
         # Check to see if it's not crazy-malformed
         if 'msg' not in msg:
             self.log.warning("msg %r, %r is crazy malformed" % (
