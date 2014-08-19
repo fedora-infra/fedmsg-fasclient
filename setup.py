@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fedmsg_fasclient',
-    version='0.5',
+    version='0.6',
     description='A fedmsg consumer that runs the fasClient based on fedmsg FAS messages',
     license="LGPLv2+",
     author='Janez Nemanič, Ralph Bean and Pierre-Yves Chibon',

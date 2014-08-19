@@ -7,7 +7,7 @@
 %global modname fedmsg_fasclient
 
 Name:               python-fedmsg-fasclient
-Version:            0.5
+Version:            0.6
 Release:            1%{?dist}
 Summary:            A fedmsg consumer that runs fasClient in response to FAS messages
 
@@ -54,6 +54,10 @@ cp -p fedmsg.d/fasclient-example-config.py \
 %config(noreplace) %{_sysconfdir}/fedmsg.d/fasclient.py*
 
 %changelog
+* Tue Aug 19 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.6-1
+- Update to 0.6
+- Do no try to remote the moksha envelop twice
+
 * Tue Aug 19 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.5-1
 - Update to 0.5
 - Strip the Moksha envelop surrounding the message
