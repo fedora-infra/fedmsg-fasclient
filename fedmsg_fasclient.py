@@ -20,6 +20,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     # distinctions).  But then we'll filter later in our consume() method.
     topic = '*'
     interesting_topics = [
+        'org.fedoraproject.prod.fas.role.update',
         'org.fedoraproject.prod.fas.group.member.sponsor',
         'org.fedoraproject.prod.fas.group.member.remove',
         'org.fedoraproject.prod.fas.user.update',
