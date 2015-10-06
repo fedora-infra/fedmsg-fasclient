@@ -89,8 +89,18 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     def action(self, messages):
         self.log.debug("Acting on %s" % pprint.pformat(messages))
 
+        playbook = 'run_fasClient_simple.yml'
+        groups = [
+            msg['msg']['group']
+            for msg in messages
+            if 'sysadmin-' in msg['msg'].get('group', None)
+            or 'fi-apprentice-' in msg['msg'].get('group', None)
+        ]
+        if groups:
+            playbook = 'run_fasClient.yml'
+
         command = '/usr/bin/sudo -i /usr/bin/ansible-playbook ' \
-            '/srv/web/infra/ansible/playbooks/run_fasClient.yml'
+            '/srv/web/infra/ansible/playbooks/%s' % playbook
         command = command.split()
 
         self.log.info("Running %r" % command)
