@@ -105,7 +105,7 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
                 whole_playbook = True
                 break
             # If one of the change is about a ssh_key, run the complete playbook
-            if msg['topic'].endswith('fas.user.update'):
+            if msg['topic'].endswith('org.fedoraproject.prod.fas.user.update'):
                 if 'ssh_key' in msg['msg'].get('fields', []):
                     whole_playbook = True
                     break
