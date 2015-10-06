@@ -89,10 +89,9 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     def action(self, messages):
         self.log.debug("Acting on %s" % pprint.pformat(messages))
 
-        # We have two playbooks: ``run_fasClient_simple.yml`` and
-        # ``run_fasClient.yml``.
-        # _simple runs a subset of ours hosts while run_fasClient runs on all of
-        # them.
+        # We have two playbooks: 
+        # - ``run_fasClient_simple.yml`` runs fasClient on a subset of our hosts
+        # - ``run_fasClient.yml``        runs fasClient on all our hosts
         # So by default we run on the subset and only run on all the hosts if
         # the message concerned a group involving sysadmins or an user that
         # changed their ssh key.
