@@ -100,8 +100,8 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
         for msg in messages:
             # If one of the groups includes a sysadmin-related group, run the
             # complete playbook
-            if 'sysadmin-' in msg['msg'].get('group', None) \
-                    or 'fi-apprentice' in msg['msg'].get('group', None):
+            if 'sysadmin' in msg['msg'].get('group', '') \
+                    or 'fi-apprentice' in msg['msg'].get('group', ''):
                 whole_playbook = True
                 break
             # If one of the change is about a ssh_key, run the complete playbook
