@@ -1,13 +1,12 @@
 %if 0%{?rhel} && 0%{?rhel} <= 6
 %{!?__python2:        %global __python2 /usr/bin/python2}
 %{!?python2_sitelib:  %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%{!?python2_sitearch: %global python2_sitearch %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 %endif
 
 %global modname fedmsg_fasclient
 
 Name:               python-fedmsg-fasclient
-Version:            0.7
+Version:            0.8
 Release:            1%{?dist}
 Summary:            A fedmsg consumer that runs fasClient in response to FAS messages
 
@@ -54,6 +53,11 @@ cp -p fedmsg.d/fasclient-example-config.py \
 %config(noreplace) %{_sysconfdir}/fedmsg.d/fasclient.py*
 
 %changelog
+* Wed Oct 07 2015 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.8-1
+- Update to 0.8
+- Adjust which playbook is run depending on which group was changed or which
+  field of an user account was edited
+
 * Sat Dec 13 2014 Pierre-Yves Chibon <pingou@pingoured.fr> - 0.7-1
 - Update to 0.7
 - Also trigger on fas.role.update
