@@ -89,8 +89,32 @@ class FasClientConsumer(fedmsg.consumers.FedmsgConsumer):
     def action(self, messages):
         self.log.debug("Acting on %s" % pprint.pformat(messages))
 
+        # We have two playbooks: 
+        # - ``run_fasClient_simple.yml`` runs fasClient on a subset of our hosts
+        # - ``run_fasClient.yml``        runs fasClient on all our hosts
+        # So by default we run on the subset and only run on all the hosts if
+        # the message concerned a group involving sysadmins or an user that
+        # changed their ssh key.
+        playbook = 'run_fasClient_simple.yml'
+        whole_playbook = False
+        for msg in messages:
+            # If one of the groups includes a sysadmin-related group, run the
+            # complete playbook
+            if 'sysadmin' in msg['msg'].get('group', '') \
+                    or 'fi-apprentice' in msg['msg'].get('group', ''):
+                whole_playbook = True
+                break
+            # If one of the change is about a ssh_key, run the complete playbook
+            if msg['topic'].endswith('org.fedoraproject.prod.fas.user.update'):
+                if 'ssh_key' in msg['msg'].get('fields', []):
+                    whole_playbook = True
+                    break
+
+        if whole_playbook:
+            playbook = 'run_fasClient.yml'
+
         command = '/usr/bin/sudo -i /usr/bin/ansible-playbook ' \
-            '/srv/web/infra/ansible/playbooks/run_fasClient.yml'
+            '/srv/web/infra/ansible/playbooks/%s' % playbook
         command = command.split()
 
         self.log.info("Running %r" % command)
